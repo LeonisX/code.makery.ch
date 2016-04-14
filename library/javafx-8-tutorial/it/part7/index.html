@@ -281,20 +281,20 @@
 </ul>
 <hr>
 <h2 id="cos-il-deployment">Cos'è il Deployment</h2>
-<p>Il deplyoment è il processo di impacchettare e ditribuire agli utenti il software sviluppato. Si tratta di una parte cruciale del processo di sviluppo del software poichè costituisce il primo contatto che gli utenti avranno con il nostro sofware.</p>
-<p>Java viene pubblicizzato con lo slogan <strong>Write Once, Run Anywhere</strong> (scrivi una volta, esegui ovunque) per illustrare i benefici <em>multi-piattaforma</em> del linguaggio Java. Idealmente questo significa che la nostra applicazione Java puà essere eseguita su qualsiasi dispositivo equipaggiato con una Java virtual machine (JVM).</p>
+<p>Il deplyoment è il processo di impacchettamento e distribuzione verso gli utenti del software che abbiamo sviluppato. Si tratta di una parte cruciale del processo di sviluppo poichè costituisce il primo contatto che gli utenti avranno con il nostro software.</p>
+<p>Java viene pubblicizzato con lo slogan <strong>Write Once, Run Anywhere</strong> (scrivi una volta, esegui ovunque) per illustrare i benefici <em>multi-piattaforma</em> del linguaggio Java. Idealmente questo significa che la nostra applicazione Java puà essere eseguita su qualsiasi dispositivo equipaggiato con una Java Virtual Machine (JVM).</p>
 <p>In passato, la user experience per l'installazione di applicazioni Java non sempre filava liscio. Se l'utente non disponeva della versione richiesta di Java sul proprio sistema, veniva prima indirizzato sull'installazione. Questo conduceva ad alcune difficoltà, ad esempio la necessità di disporre di diritti di amministrazione, problemi di compatibilità tra le versioni di Java ecc.</p>
 <p>Fortunatamente, JavaFX fornisce una nuova opzione di deploy chiamata <strong>Package Nativo</strong> (nota anche come Self-Contained Application Package).Un package nativo raggruppa sia il codice dell'applicazione sia l'ambiente di runtime Java specifico per la piattaforma di destinazione. </p>
 <p>La documentazione JavaFX di Oracle contiene una guida esaustiva per tutte le possibili <a href="http://docs.oracle.com/javafx/2/deployment/jfxpub-deployment.htm">opzioni di deploy JavaFX</a>. </p>
-<p>In questo posto vi mostrerò come creare un <strong>Package Nativo</strong> con eclipse e il <a href="http://www.eclipse.org/efxclipse/"><strong>plugin e(fx)clipse </strong></a>.</p>
+<p>In questo post vi mostrerò come creare un <strong>Package Nativo</strong> con eclipse e il <a href="http://www.eclipse.org/efxclipse/"><strong>plugin e(fx)clipse </strong></a>.</p>
 <hr>
 <h2 id="creare-un-package-nativo">Creare un Package Nativo</h2>
-<p>L'obiettivo è di creare una applicazione auto-consistente in una singola cartella sul computer dell'utente. Ecco questo come apparirà per la nostra appliazione AddressApp (su Windows):</p>
+<p>L'obiettivo è di creare una applicazione auto-consistente in una singola cartella sul computer dell'utente. Ecco come questo apparirà per la nostra appliazione AddressApp (su Windows):</p>
 <p><img src="/assets/library/javafx-8-tutorial/part7/native-package.png" alt="AddressApp Native Package"></p>
-<p>La cartella <code>app</code> contiene i dati della nostra applicazione mentre la cartella <code>runtime</code> contiene l'ambiente Java di runtime specifico.</p>
+<p>La cartella <code>app</code> contiene i dati della nostra applicazione mentre la cartella <code>runtime</code> contiene lo specifico ambiente Java di runtime.</p>
 <p>Per rendere il tutto ancora più semplice per l'utente, forniremo un installer:</p>
 <ul>
-<li>Un installe per windows sotto forma di file <code>exe</code></li>
+<li>Un installer per windows sotto forma di file <code>exe</code></li>
 <li>Un installer (drag and drop) per MacOS sotto forma di <code>dmg</code> (drag and drop)</li>
 </ul>
 <p>Il plugin e(fx)clipse ci aiuterà a generare il package nativo e l'installer.</p>
@@ -327,8 +327,8 @@
 <li><code>build/package/macosx</code> (utilizzata solo per macos)</li>
 </ul>
 </li>
-<li>Copia le icone corrispondenti sopra dentro le sottocartelle. Adesso dovrebbe apparire così:<br><img src="/assets/library/javafx-8-tutorial/part7/installer-icons.png" alt="Installer Icons"></li>
-<li><strong>Important</strong>: Il nome delle icone deve corrispondere esattamente al campo <strong>Application title</strong> che avete specificato nel file <code>build.fxbuild</code>:<ul>
+<li>Copiate le icone sopra dentro le sottocartelle corrispondenti. Adesso dovrebbe apparire così:<br><img src="/assets/library/javafx-8-tutorial/part7/installer-icons.png" alt="Installer Icons"></li>
+<li><strong>Importante</strong>: Il nome delle icone deve corrispondere esattamente al campo <strong>Application title</strong> che avete specificato nel file <code>build.fxbuild</code>:<ul>
 <li><code>YourAppTitle.ico</code></li>
 <li><code>YourAppTitle-setup-icon.bmp</code></li>
 <li><code>YourAppTitle.icns</code></li>
@@ -348,7 +348,7 @@
 <h3 id="passo-4-editare-build-xml-per-includere-le-icone">Passo 4 - Editare build.xml per includere le icone</h3>
 <p>E(fx)clipse ha generato un  file <code>build/build.xml</code> che è pronto per essere dato in pasto al tool <strong>Ant</strong>, ma le icone e le risorse del nostro installer non funzionerebbero. </p>
 <p>Dato che non è possibile (per il momento) istruire e(fx)clipse per includere risorse addizionali alla nostra cartella <code>resources</code> e le icone degli installer che abbiamo aggiunto sopra, dobbiamo modificare manualmente il file <code>build.xml</code>:</p>
-<p>Aprite <code>build.xml</code> e cercate l'elemento <code>fxant</code>. Aggiungete una riga per la <code>${basedir}</code> (ciò renderà disponibile le icone degli installer):</p>
+<p>Aprite <code>build.xml</code> e cercate l'elemento <code>fxant</code>. Aggiungete una riga per la <code>${basedir}</code> (ciò renderà disponibili le icone degli installer):</p>
 <h5 id="build-xml-add-basedir-">build.xml - add "basedir"</h5>
 <pre class="prettyprint lang-xml">
 &lt;path id="fxant"&gt;
@@ -409,7 +409,7 @@
 <p>Il file <code>AddressApp-1.0.exe</code> può essere utilizzato per installare l'applicazione. L'installer copierà il bundle in <code>C:/Users/[yourname]/AppData/Local/AddressApp</code>.</p>
 <h3 id="cosa-c-dopo-">Cosa c'è dopo?</h3>
 <p>Spero che questo tutorial vi sia stato d'aiuto per iniziare con JavaFX e che sarete in grado di scrivere il vostro progetto JavaFX a partire da adesso.</p>
-<p>Ogni feedback sarà apprezzato. Sentitevi liberidi lasciare commento se avete dei suggerimnto o se qualcosa non vi è chiaro.</p>
+<p>Ogni feedback sarà apprezzato. Sentitevi liberi di lasciare un commento se avete dei suggerimenti o se qualcosa non vi è chiaro.</p>
 <h5 id="qualche-altro-articolo-che-potreste-trovare-interessante">Qualche altro articolo che potreste trovare interessante</h5>
 <ul>
 <li><a href="/blog/javafx-dialogs-official/">JavaFX Dialogs (official)</a></li>
